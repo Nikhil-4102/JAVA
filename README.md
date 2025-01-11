@@ -1,2 +1,2 @@
 # JAVA
-Core concepts + DSA Practice 
+Core concepts + OOPS + DSA Practice 
