@@ -13,7 +13,7 @@ public class LinkedList {
     }
     public static Node head;    // declearing head as a static bcoz it can be referable to whole class
     public static Node tail;
-    public static int size ;    // declearing tail 
+    public  int size ;    // declearing tail 
 
 
 

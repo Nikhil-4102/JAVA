@@ -16,6 +16,6 @@ public class Pattern_4 {
            }
            System.out.println();
         }
-
+        scan.close();
     }
 }
