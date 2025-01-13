@@ -17,5 +17,6 @@ public class TreeSetDemo {
     for (String city : cities) {
         System.out.println(city);
      }
+     
     }
 }
