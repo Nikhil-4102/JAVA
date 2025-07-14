@@ -1,63 +1,49 @@
 package DSA.Sorting;
 
 public class MergeSort {
-
-    private void mergeSort(int[] nums){
-        int n = nums.length;
-        if(n<2){
-        return;
-        }
-        
-        int mid = n/2;
-        int [] left = new int[mid];
-        int [] right = new int[n - mid];
-       
-        for(int i=0; i<mid ; i++){
-            left[i] = nums[i] ;
-        }
-        for(int i= mid ; i<n ; i++){
-            right[i-mid] = nums[i] ;
-        }
-
-        mergeSort(left);
-        mergeSort(right);
-
-        merge(nums , left , right );
-
+ 
+    public static int[] mergeSort(int[] nums) {
+      ms(nums,0, nums.length-1);
+       return nums; 
     }
 
-  private void merge(int[] result , int[] first , int[] second){
-      
-        int i=0 , j=0 , k=0 ;
-        while(i<first.length && j<second.length){
-            if(first[i]<second[j]){
-               result[k]=first[i];
-               k++;
-               i++;
-            }else{
-                result[k] = second[j];
-                 k++;
-                 j++;
-            }    
+    public static void ms(int nums[] , int si , int ei){ 
+        if(si >= ei) {
+            return; // Base case: if the subarray has one or no elements, it's already sorted
         }
-        while (i<first.length) {
-            result[k++] = first[i++]  ;
-        }
-        while (j<second.length) {
-            result[k++] = second[j++]  ;
-        }
+      int mid = si + (ei-si)/2 ;
+      ms(nums , si , mid);
+      ms(nums , mid+1 , ei);
+      merge(nums, si , mid ,ei);
     }
 
-  public void sort(int[] nums){    
-    mergeSort(nums);
-     }
+    public static void merge(int nums[] , int si , int mid , int ei){
+        int temp[] = new int[ei-si+1];
+        int i= si , j = mid+1 , k=0 ;
+
+        while(i<=mid && j<=ei){
+              if(nums[i] < nums[j]){
+                temp[k++] = nums[i++];
+              }else{
+                temp[k++] = nums[j++];
+              }
+        }
+        while(i<= mid){
+            temp[k++] = nums[i++];
+        }
+        while(j<= ei){
+            temp[k++] = nums[j++];
+        }
+        for(k= 0 , i=si ; k<temp.length ; k++,i++){
+            nums[i] = temp[k];
+        }
+    }
+   
 
  public static void main(String[] args) {
-        int [] nums = { 8,4,14,77,43,12};
 
-        MergeSort merg = new MergeSort();
-        merg.sort(nums);
-
+        int [] nums = {8,4,14,77,43,12};
+        mergeSort(nums);
         System.out.print("Sorted Aarray : ");
         printArray(nums); 
     }

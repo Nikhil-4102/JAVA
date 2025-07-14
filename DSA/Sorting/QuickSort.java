@@ -1,51 +1,41 @@
 package DSA.Sorting;
 
 public class QuickSort {
-
-    private int partition(int[] nums , int low , int high){
-
-        int pivot = nums[high];
-        int i = low;
-        for(int j=low ; j<high ; j++){
-            if(nums[j]<pivot){
-                swap(nums, i, j);
-                i++;
-            }
+    
+    public static void quickSort(int[] nums , int si , int ei) {
+        if(si>= ei){
+            return ;
         }
-        swap(nums, i, high);
-        return i ;
+            int pivotIndex = partition(nums, si, ei);
+            quickSort(nums, si, pivotIndex - 1);
+            quickSort(nums, pivotIndex + 1, ei);
+        
     }
 
-
-    private void quickSort(int[] nums , int low , int high){
-         
-        if(low < high){
-           int partitionIndex = partition(nums , low ,high);
-           quickSort(nums, 0, partitionIndex-1);
-           quickSort(nums, partitionIndex+1 , high);
-        }
-    }
-
-
-    public void sort(int[] nums){
+    public static int partition(int[] nums, int si, int ei) {
+       int pivot = nums[ei];
+       int i = si-1;
+       for(int j = si ; j<ei ; j++){
+           if(nums[j] <= pivot){
+            i++;
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+           }
+       }
+       i++;
+       int temp= pivot ;
+       nums[ei] = nums[i];
+       nums[i] = temp;    
        
-       quickSort(nums , 0 , nums.length-1) ;
+       return i;
     }
-
-
-    private void swap(int[] nums , int i , int j){
-         int temp = nums[i];
-          nums[i] = nums[j];     
-          nums[j] = temp;
-    }
-
+  
     
     public static void main(String[] args) {
         int [] nums = { 8,4,14,77,43,12};
 
-        QuickSort QuickSort = new QuickSort();
-        QuickSort.sort(nums);
-
+        quickSort(nums, 0, nums.length - 1);
         System.out.print("Sorted Aarray : ");
         printArray(nums); 
 
