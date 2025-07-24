@@ -2,146 +2,218 @@ package DSA.LinkedList;
 
 
 public class LinkedList {
-    
-    public static class Node{    // to create 1st single node we have to create Node class  
-        int data ;
-        Node next ;
-        public Node(int data){
-            this.data = data;
-            this.next = null;
-        }
-    }
-    public static Node head;    // declearing head as a static bcoz it can be referable to whole class
-    public static Node tail;
-    public  int size ;    // declearing tail 
 
+   public static class Node {
+      int data ; 
+      Node next ;
+      Node(int data){
+         this.data = data ;
+         this .next = null ;
+      }
+   }
+   public static Node head;
+   public static Node tail;
 
+   public void addFirst(int data){  //............................................add first
+      Node newNode = new Node(data);
+      if(head == null){
+         head= tail = newNode;
+         return ;
+      }
+      newNode.next = head ;
+      head = newNode;
+   }  
 
-    public void addfirst(int data){    // add value to first of linked list 
-        Node newNode = new Node(data);
-        size++;
-        if(head==null){
-           head = tail = newNode ;
-           return ;
-        }
-        newNode.next = head ;
-        head  = newNode ;
-    }
-    
+   public void addLast(int data){   // ............................................add last
+      Node newNode = new Node(data);
+      if(head == null){
+         head= tail = newNode;
+         return ;
+      }
+      tail.next = newNode;
+      tail = newNode;
+   }
 
+   public void printLL(){   //............................................print linked list
+       Node temp = head;
+       while(temp != null){
+         System.out.print(temp.data + " -> ");
+         temp = temp.next;;
+       }
+       System.out.println("null");
+   }
 
-    public void addlast(int data){      // add value to last of the linked list 
-        Node newNode = new Node(data);
-        size++;
-        if(head==null){
-            head= tail= newNode;
-            return;
-        }
-        tail.next = newNode;
-        tail = newNode ;
-    }
-
-
-
-    public void add(int index , int data){    // add value  at given index 
-
-        if (index==0 ){
-            addfirst(data);
-            return ;
-        }
-        Node newNode = new Node(data);
-        size++;
-        Node temp = head ;
-        int i = 0 ; 
-        while(i < index-1){
+   public void addMiddle(int data , int index){     //............................................add middle
+        Node newNode =  new Node(data);
+         if(head == null){
+               head = tail = newNode;
+               return ;
+         }
+         Node temp = head;
+         for(int i = 0 ; i < index - 1 ; i++){
             temp = temp.next;
-            i++;
-        }
-        newNode.next = temp.next ;
-        temp.next = newNode ;
-    }
+         }
+         newNode.next = temp.next ;
+         temp.next = newNode;
+         if(newNode.next == null){ // if new node is added at the end   
+            tail = newNode;
+         }    
+   }
+
+   public int size(){            //............................................size of linked list
+      Node temp = head;
+      int size  = 0 ;
+      while (temp != null){
+         temp = temp.next;
+         size++;
+      }
+       return size;
+   }
 
 
+   public int deleteFirst(){     //............................................delete first
+      if(head == null){
+         System.out.println("LinkedList is empty");
+         return -1;
+      }
+      if(head == tail){
+         head = tail = null ;
+         return head.data;
+      }
+      int val = head.data;
+      head = head.next ;
+      return val;
+   }
 
-    public int removeFirst(){             //   remove first element from linked list  
-        if(size==0){
-            System.out.println("LL is empty");
-            return Integer.MIN_VALUE;
-        }else if (size ==1){
-            int val = head.data ;
-            head= tail = null;
-            size = 0 ;
-            return val ;
-        }
-        int val = head.data;
-        head = head.next ;
-        size--;
-        return val ;
-    }
-
-
-
-    public int removeLast(){       //  remove last node from LL  
-        if(size==0){
-        System.out.println("LL is empty");
-        return Integer.MIN_VALUE;
-        }else if( size==1){
+   public int deleteLast(){     //............................................delete last
+      if(head == null){
+         System.out.println("LinkedList is empty");
+         return -1;
+      }
+      if(head == tail){
          int val = head.data;
-         head = tail = null;
-         size = 0 ;
-         return val; 
-        }
-        Node prev = head;
-        for(int i = 0 ; i< size-2 ; i++){
-            prev = prev.next ;
-        }
-        int val = prev.next.data ;
-        prev.next=null;
-        tail = prev;
-        size--;
-        return val ;
-    }
+         head = tail = null ;
+         return val;
+      }
+      Node prev = head;
+      for(int i = 0 ; i<size()-2 ; i++){
+         prev = prev.next;
+      }
+      int val = tail.data;
+      prev.next = null;
+      tail = prev;
+      return val;      
+   }
 
+   public int deleteMiddle(int index){        //............................................delete middle
 
+      if(index < 0 || index >= size()){
+         System.out.println("Invalid index");
+         return -1;
+      }
 
-    public void printLL(){      // to print all linked list 
-        Node temp = head ;
-        while(temp != null){
-            System.out.print(temp.data + "-");
-            temp = temp.next;
-        }
-        System.out.println("null");
-    }
+      if(head==null){
+         System.out.println("LinkedList is empty");
+         return -1;
+      }
+      if(head == tail){
+         int val = head.data;
+         head = tail = null ;
+         return val;
+      }
+      Node temp = head ;
+      if(index == 0){
+         return deleteFirst();
+      }
+      if(index == size() - 1){
+         return deleteLast();
+      }
+      for(int i = 0 ; i < index-1 ; i++){
+         temp = temp.next;
+      }
+      int val = temp.next.data;
+      temp.next = temp.next.next;
+      return val;
 
+   }
 
+   public int search(int key){      //............................................search (itterative)
+      Node temp = head;
+      int i = 0 ;
+      while(temp != null){
+         if(temp.data == key){
+            return i;
+         }
+         temp = temp.next;
+         i++;
+      }
+      return -1;
+   }
+
+   public int serach2(int key){     //............................................search (recursive)
+      return helper(head,key);
+   }
+   private int helper(Node head ,int key){
+      if(head ==  null){
+         return -1;
+      }
+      if(head.data == key){
+         return 0;
+      }
+      int index = helper(head.next, key);
+      if(index == -1){
+         return -1;
+      }  
+      return index + 1; // increment index by 1 for each recursive call
+   }
+
+   public void reverse(){                         //............................................reverse linked list
+      
+      Node prev= null;
+      Node crr = head;
+      tail = head ;
+      Node next ;
+      while(crr != null){
+         next = crr.next ;
+         crr.next = prev ;
+         prev = crr ;
+         crr = next ;
+      }
+      head = prev ;
+      return ;
+   }
+
+   public static void main(String[] args) {
+
+      LinkedList list = new LinkedList();
+      list.addFirst(10);
+      list.addFirst(20);
+      list.addFirst(30);
+      list.addLast(40);
+      list.addLast(50);
+      list.addMiddle(25, 2);
+      list.addMiddle(35, 4);
+
+      list.printLL();
+      list.size();
+
+      list.deleteFirst();
+      list.deleteLast();
+
+      list.printLL();
+      list.size();
+
+      System.out.println(  list.search(35));
+      System.out.println(list.search(100));
+      System.out.println(".............................................");
+      System.out.println(  list.serach2(35));
+      System.out.println(list.serach2(100));
+
+      list.deleteMiddle(2);
+      list.printLL();
+
+      list.reverse();
+      list.printLL();
     
-    public static void main(String args[]){  // main function 
-         LinkedList ll = new LinkedList();
-         ll.printLL();
-         
-         ll.addfirst(2);
-         ll.printLL();
-
-         ll.addfirst(1);
-         ll.printLL();
-
-         ll.addlast(3);
-         ll.printLL(); 
-         
-         ll.addlast(4);
-         ll.printLL(); 
-         
-         ll.add(2, 5);
-         ll.printLL();
-
-        System.out.println("Length of LL : "+ll.size);
-
-        ll.removeFirst();
-        ll.printLL();
-
-        ll.removeLast();
-        ll.printLL();
-
-        System.out.println("Length of LL : "+ll.size);
-    }
+   }
 }
