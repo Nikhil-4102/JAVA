@@ -8,7 +8,7 @@ public class LinkedList {
       Node next ;
       Node(int data){
          this.data = data ;
-         this .next = null ;
+         this.next = null ;
       }
    }
    public static Node head;
@@ -167,7 +167,7 @@ public class LinkedList {
       return index + 1; // increment index by 1 for each recursive call
    }
 
-   public void reverse(){                         //............................................reverse linked list
+   public void reverse(){                    //............................................reverse linked list
       
       Node prev= null;
       Node crr = head;
@@ -216,4 +216,5 @@ public class LinkedList {
       list.printLL();
     
    }
+
 }

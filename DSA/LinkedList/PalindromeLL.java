@@ -2,76 +2,86 @@ package DSA.LinkedList;
 
 public class PalindromeLL {
     
-    public static class Node{
-        int data ; 
-        Node next ; 
-        public Node(int data){
-          this.data = data;
-          this.next = null;
-        }
-    } 
+  public class Node{
+    int data ;
+    Node next;
+    Node(int data){
+        this.data = data;
+        this.next = null;
+    }
+  }
+  public static Node head;
+  public static Node tail;
 
-    public static Node head ; 
-    public static Node tail ;
-    public static int size ;
+  public void addLast(int data){
+    Node newNode = new Node(data);
+    if(head == null){
+        head = tail = newNode;
+    }
+    tail.next = newNode;
+    tail = newNode;
+  }  
 
-    public void addLastToLL(int data){      // add value to last of the linked list 
-        Node newNode = new Node(data);
-        size++;
-        if(head==null){
-            head= tail= newNode;
-            return;
-        }
-        tail.next = newNode;
-        tail = newNode ;
+  public void printLL(){
+    Node temp = head;
+    while(temp != null){
+        System.out.print(temp.data + " -> ");
+        temp = temp.next;
+    }
+    System.out.println("null");
+  }
+
+  public static Node midNode(Node head){
+    if(head == null) return null;
+    Node slow = head;
+    Node fast = head;
+    while(fast != null && fast.next != null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow; // mid node
+  }
+
+  public static boolean isPalindrome(){
+    if(head == null || head.next == null) return true;
+
+    Node mid = midNode(head);
+    Node prev = null;
+    Node curr = mid;
+    Node next;
+
+    // Reverse the second half of the linked list
+    while(curr != null){
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
     }
 
-    public Node findMidOfLL(Node head){   // finding mid of linked list using slow fast algorithm
-        Node slow = head ;
-        Node fast = head ;
-        while(fast !=null && fast.next != null){
-            slow = slow.next ;
-            fast = fast.next.next ;
-        }
-        return slow ;
+    Node firstHalf = head;
+    Node secondHalf = prev;
+
+    // Compare both halves
+    while(secondHalf != null){
+        if(firstHalf.data != secondHalf.data) return false;
+        firstHalf = firstHalf.next;
+        secondHalf = secondHalf.next;
     }
+    
+    return true;
+  }
+    
 
-    public boolean CheckPalindrome(){         // checking Linked list is palindrome or not 
-        if(head == null || head.next == null) return true;
-        Node midNode = findMidOfLL(head); 
-        
-        Node prev = null;
-        Node crr = midNode;
-        Node next ;
-        while(crr != null){
-            next =crr.next ;
-            crr.next=prev ;
-            prev= crr;
-            crr=next; 
-        }
+  public static void main(String[] args) {
+    PalindromeLL ll = new PalindromeLL();
+    ll.addLast(1);  
+    ll.addLast(2);
+    ll.addLast(3);
+    ll.addLast(2);
+    ll.addLast(1);
 
-        Node left = head;
-        Node right = prev;
-        while(right != null){
-            if(left.data != right.data) return false ;
-            left= left.next;
-            right = right.next;
-        }
-        return true ;
-        
-    }
-
-        public static void main(String[] args) {
-         PalindromeLL ll = new PalindromeLL();
-        
-         ll.addLastToLL(20);
-         ll.addLastToLL(65);
-         ll.addLastToLL(45);
-         ll.addLastToLL(45);
-         ll.addLastToLL(65);
-         ll.addLastToLL(20);
-         
-         System.out.println(ll. CheckPalindrome());
-
-    }
+    ll.printLL();
+    System.out.println(isPalindrome());
+    
+  }
 }
