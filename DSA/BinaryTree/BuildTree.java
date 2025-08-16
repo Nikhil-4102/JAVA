@@ -1,6 +1,5 @@
 package DSA.BinaryTree;
 
-import DSA.BinaryTree.PreOrder.preorder;
 
 public class BuildTree {
 
