@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class Stack_JCF {
 
-  
     
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<>();

@@ -38,7 +38,6 @@ public class RemoveLoop {
         Node slow = head;
         Node fast = head;
 
-        // Detect loop using Floyd's Cycle-Finding Algorithm
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -50,7 +49,6 @@ public class RemoveLoop {
 
         if (slow != fast) return; // No loop
 
-        // Find the start of the loop
         slow = head;
         Node loopNode = null;
         while (slow != fast) {
