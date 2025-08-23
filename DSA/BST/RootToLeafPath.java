@@ -25,7 +25,7 @@ public class RootToLeafPath {
         return root;
      }
 
-     public static void inorder(Node root){ // inorder traversal to check it valid BST or NOT IF inorder is sorted then it valid BST
+     public static void inorder(Node root){ 
         if(root ==null) return ;
         inorder(root.left);
         System.out.print(root.data+" ");
