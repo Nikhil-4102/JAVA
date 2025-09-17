@@ -18,6 +18,8 @@ public class ClimbingStairs {
         return dp[steps];
 
     }
+
+    //dp- tabulation
     
     public static void main(String[] args) {
         
