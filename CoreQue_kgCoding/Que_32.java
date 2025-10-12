@@ -23,13 +23,13 @@ public class Que_32 {
 
     public static int LCM(int A ,int B){
 
-        for(int i = 1 ; i<=B ; i++ ){
-       
-            int Fact = A*i ;
-            if(Fact%B==0){
-                return Fact ;
-            }   
+        for(int i = 1 ; i<=B ; i++){
+            int fact = A * i;
+            if(fact % B == 0){
+                return fact;
+            }
         }
+
         return 0 ;
     }
 
