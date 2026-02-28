@@ -23,7 +23,7 @@ public class Que_33 {
      
     public static int GCD(int A , int B){
        int Factor = 1 ;
-       int Smallest= Smallest(A,B);
+       int Smallest= Math.min(A,B);
        for(int i = 2 ; i<=Smallest ; i++){
          if (A%i==0 && B%i==0){
             Factor = i ;
@@ -31,13 +31,5 @@ public class Que_33 {
        }
       return Factor ;
 
-    }
-    public static int Smallest(int A , int B ){
-        if(A<B){
-            return A ;
-        }
-        else{
-            return B ;
-        }
     }
 }

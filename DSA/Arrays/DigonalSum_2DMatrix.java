@@ -15,6 +15,7 @@ public class DigonalSum_2DMatrix {
                 }
            }
            return sum;
+
     }
     
     public static void main(String[] args) {

@@ -27,8 +27,8 @@ public class Que_38 {
         return NewNum ;
     }
 
-    public static String Palendrome(int NewNum){
-        if(NewNum==Reverce(NewNum)){
+    public static String Palendrome(int N){
+        if(N==Reverce(N)){
             return "Yes it is a Palendrome";
         }
         return "Not a Palendrome " ;

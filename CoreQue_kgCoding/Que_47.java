@@ -27,7 +27,7 @@ public class Que_47 {
         int [] Result = Sorted(Arr1, Arr2);
         System.out.println("Your New Merged And Sorted Array is : ");
         for(int k= 0; k<Result.length ;k++){
-            System.out.println(Result[k]);
+            System.out.print(Result[k] + " ");
         }
 
         sc.close();
@@ -37,18 +37,20 @@ public class Que_47 {
        int NewSize = Arr1.length + Arr2.length ; 
        int[] NewArr = new int[NewSize];
        int i=0 ,j=0 , k=0 ;
-       while (i<Arr1.length || j<Arr2.length) {
-
-        if(j==Arr2.length || (i<Arr1.length && Arr1[i]<Arr2[j])){
-            NewArr[k] = Arr1[i] ; 
-            k++;
-            i++;
-        }else{
-            NewArr[k] = Arr2[j];
-            k++;
-            j++;
-        }
+       while (i<Arr1.length && j<Arr2.length) {
+         if(Arr1[i]<Arr2[j]){
+            NewArr[k++] = Arr1[i++];
+         }else{
+            NewArr[k++] = Arr2[j++];
+         }
        }
+       while(i<Arr1.length){
+        NewArr[k++] = Arr1[i++];
+       }
+       while(j<Arr2.length){
+        NewArr[k++] = Arr2[j++];
+       }
+
     return NewArr ;
     }
 }
